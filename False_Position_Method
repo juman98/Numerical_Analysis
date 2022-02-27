@@ -1,0 +1,46 @@
+
+import math
+
+def func(x): #cont test function/ [a0,b0] = [1,2]
+    return x^3+3*x-5
+
+#Inputs 
+a=1
+b=2
+Ya=func(a)
+Yb=func(b)
+Delta=5e-9
+Epsilon=5e-9
+Max=50 
+
+if Ya*Yb<0: #f(a)and f(b)must have opposite signs 
+    for k in range(1):
+        px=Yb*(b-a)/(Yb-Ya) #Find the point that touches x-axis
+        c=b-px
+        Ac=c-a
+        Yc=func(c)
+        if Yc==0: #check if the found point is the root
+            break
+        #Find the num with the opposite sign to repeat the steps
+        elif Yb*Yc>0:
+            b=c
+            Yb=Yc
+        else:
+            a=c
+            Ya=Yc
+        #to terminate the iterations
+        px=min(abs(px),Ac)
+        if abs(px)<Delta:
+            break
+        if abs(Yc)<Epsilon:
+            break
+    #Output        
+    err=abs(b-a)/2
+    Yc=func(c)
+    print("The root is:",c)
+    print("f(c)= ",Yc)
+    print("The error estimate for c is: ",err)
+    
+else:
+    print("Can't proceed,the condition is violated")
+
