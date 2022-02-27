@@ -1,0 +1,45 @@
+import math
+
+def func(x): # cont test function/ [a0, b0] = [3.2,4.0]
+    return math.log(x)-5+x
+
+#Random Inputs 
+a=3.2
+b=4.0
+Ya=func(a)
+Yb=func(b)
+Delta=5e-9
+Max=50
+
+if Ya*Yb<0: #f(a)and f(b)must have opposite signs 
+    for k in range(1,Max):
+        #Find the midpoint
+        c=(a+b)/2 
+        Yc=func(c)
+        #Check if midpoint is a root
+        if Yc==0:
+            a=c
+            b=c
+        #Find the num with the opposite sign to repeat the steps
+        elif (Yb*Yc>0):
+            b=c
+            Yb=Yc
+        else:
+            a=c
+            Ya=Yc
+        #to terminate the iterations 
+        if b-a<Delta:
+            #print(b-a)
+            break
+    #Output        
+    #c=(a+b)/2
+    #print(b-a)
+    err=abs(b-a)
+    #Yc=func(c)
+    print("The root is:",c)
+    print("f(c)= ",Yc)
+    print("The error estimate for c is: ",err)
+    #print(k)
+    
+else:
+    print("Can't proceed,the condition is violated")
